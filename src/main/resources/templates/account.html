@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Details - Bank Account App</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Account Details</h1>
+            <p class="subtitle">View your account information</p>
+        </header>
+        
+        <nav>
+            <a href="/" class="btn btn-secondary">Back to Home</a>
+        </nav>
+        
+        <main>
+            <div th:if="${success}" class="alert alert-success">
+                <span th:text="${success}">Success message</span>
+            </div>
+            
+            <div th:if="${error}" class="alert alert-error">
+                <span th:text="${error}">Error message</span>
+            </div>
+            
+            <section class="account-detail">
+                <div class="detail-card">
+                    <div class="detail-header">
+                        <h2 th:text="${account.accountHolderName}">Account Holder</h2>
+                        <span class="badge">Active</span>
+                    </div>
+                    
+                    <div class="detail-body">
+                        <div class="detail-row">
+                            <span class="label">Account Number:</span>
+                            <span class="value" th:text="${account.accountNumber}">1234567890</span>
+                        </div>
+                        
+                        <div class="detail-row balance-row">
+                            <span class="label">Current Balance:</span>
+                            <span class="value balance-amount" th:text="'$' + ${#numbers.formatDecimal(account.balance, 1, 2)}">$0.00</span>
+                        </div>
+                        
+                        <div class="detail-row">
+                            <span class="label">Created:</span>
+                            <span class="value" th:text="${#temporals.format(account.createdAt, 'MMM dd, yyyy HH:mm')}">Jan 01, 2026</span>
+                        </div>
+                        
+                        <div class="detail-row">
+                            <span class="label">Last Updated:</span>
+                            <span class="value" th:text="${#temporals.format(account.updatedAt, 'MMM dd, yyyy HH:mm')}">Jan 01, 2026</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-actions">
+                        <a th:href="@{/deposit/{num}(num=${account.accountNumber})}" class="btn btn-success btn-large">
+                            Deposit
+                        </a>
+                        <a th:href="@{/withdraw/{num}(num=${account.accountNumber})}" class="btn btn-warning btn-large">
+                            Withdraw
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>2026 Bank Account App. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

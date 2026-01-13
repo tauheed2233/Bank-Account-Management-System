@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account App</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bank Account Manager</h1>
+            <p class="subtitle">Manage your accounts with ease</p>
+        </header>
+        
+        <nav>
+            <a href="/" class="btn btn-secondary">Home</a>
+            <a href="/create" class="btn btn-primary">Create New Account</a>
+        </nav>
+        
+        <main>
+            <div th:if="${param.error}" class="alert alert-error">
+                <span th:text="${param.error}">Error message</span>
+            </div>
+            
+            <section class="accounts-section">
+                <h2>All Accounts</h2>
+                
+                <div th:if="${#lists.isEmpty(accounts)}" class="empty-state">
+                    <p>No accounts found. Create your first account!</p>
+                    <a href="/create" class="btn btn-primary">Create Account</a>
+                </div>
+                
+                <div th:if="${not #lists.isEmpty(accounts)}" class="accounts-grid">
+                    <div th:each="account : ${accounts}" class="account-card">
+                        <div class="account-header">
+                            <span class="account-holder" th:text="${account.accountHolderName}">John Doe</span>
+                        </div>
+                        <div class="account-body">
+                            <div class="account-number">
+                                <span class="label">Account #:</span>
+                                <span th:text="${account.accountNumber}">1234567890</span>
+                            </div>
+                            <div class="balance">
+                                <span class="label">Balance:</span>
+                                <span class="amount" th:text="'$' + ${#numbers.formatDecimal(account.balance, 1, 2)}">$0.00</span>
+                            </div>
+                        </div>
+                        <div class="account-actions">
+                            <a th:href="@{/account/{num}(num=${account.accountNumber})}" class="btn btn-info">View</a>
+                            <a th:href="@{/deposit/{num}(num=${account.accountNumber})}" class="btn btn-success">Deposit</a>
+                            <a th:href="@{/withdraw/{num}(num=${account.accountNumber})}" class="btn btn-warning">Withdraw</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>2026 Bank Account App. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

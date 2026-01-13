@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Bank Account App</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Create New Account</h1>
+            <p class="subtitle">Open a new bank account</p>
+        </header>
+        
+        <nav>
+            <a href="/" class="btn btn-secondary">Back to Home</a>
+        </nav>
+        
+        <main>
+            <div th:if="${error}" class="alert alert-error">
+                <span th:text="${error}">Error message</span>
+            </div>
+            
+            <section class="form-section">
+                <form action="/create" method="post" class="form">
+                    <div class="form-group">
+                        <label for="accountHolderName">Account Holder Name</label>
+                        <input type="text" 
+                               id="accountHolderName" 
+                               name="accountHolderName" 
+                               placeholder="Enter your full name"
+                               required
+                               minlength="2"
+                               maxlength="100">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">Create Account</button>
+                        <a href="/" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+        
+        <footer>
+            <p>2026 Bank Account App. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

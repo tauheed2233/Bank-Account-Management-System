@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${action == 'deposit' ? 'Deposit' : 'Withdraw'} + ' - Bank Account App'">Transaction</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 th:text="${action == 'deposit' ? 'Make a Deposit' : 'Make a Withdrawal'}">Transaction</h1>
+            <p class="subtitle" th:text="${action == 'deposit' ? 'Add funds to your account' : 'Withdraw funds from your account'}">Transaction description</p>
+        </header>
+        
+        <nav>
+            <a th:href="@{/account/{num}(num=${account.accountNumber})}" class="btn btn-secondary">Back to Account</a>
+        </nav>
+        
+        <main>
+            <section class="form-section">
+                <div class="account-summary">
+                    <h3 th:text="${account.accountHolderName}">Account Holder</h3>
+                    <p>Account #: <span th:text="${account.accountNumber}">1234567890</span></p>
+                    <p class="current-balance">
+                        Current Balance: 
+                        <strong th:text="'$' + ${#numbers.formatDecimal(account.balance, 1, 2)}">$0.00</strong>
+                    </p>
+                </div>
+                
+                <form th:action="@{/{action}/{num}(action=${action}, num=${account.accountNumber})}" 
+                      method="post" 
+                      class="form">
+                    <div class="form-group">
+                        <label for="amount">Amount ($)</label>
+                        <input type="number" 
+                               id="amount" 
+                               name="amount" 
+                               placeholder="Enter amount"
+                               required
+                               min="0.01"
+                               step="0.01">
+                        <span th:if="${action == 'withdraw'}" class="hint">
+                            Maximum: $<span th:text="${#numbers.formatDecimal(account.balance, 1, 2)}">0.00</span>
+                        </span>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" 
+                                th:class="${action == 'deposit' ? 'btn btn-success btn-large' : 'btn btn-warning btn-large'}"
+                                th:text="${action == 'deposit' ? 'Deposit' : 'Withdraw'}">
+                            Submit
+                        </button>
+                        <a th:href="@{/account/{num}(num=${account.accountNumber})}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+        
+        <footer>
+            <p>2026 Bank Account App. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
