@@ -1,8 +1,8 @@
-<img width="2559" height="1248" alt="img1" src="https://github.com/user-attachments/assets/e2034f6e-857e-42fc-89f5-bb355dfc462d" />
+<img width="1543" height="928" alt="img1" src="https://github.com/user-attachments/assets/7118c98f-4ef9-4af7-8078-db6f9ac2c762" />
 
-![img2](https://github.com/user-attachments/assets/e5557837-8c7e-462d-bc42-1d19e28fcad9)
+![img2](https://github.com/user-attachments/assets/0f97d4a3-4410-4756-baea-c2bc08e87519)
 
-![img3](https://github.com/user-attachments/assets/e00ebfd5-29cf-4357-b0dd-fd511b983488)
+![img3](https://github.com/user-attachments/assets/8f0f7064-4ad0-4c98-a09e-9138ee0e2c59)
 
 # Bank Account Management System
 
